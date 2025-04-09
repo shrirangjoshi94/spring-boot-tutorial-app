@@ -79,4 +79,12 @@ public ResponseEntity<List<Product>> getAll()
         return new ResponseEntity<>("Logged in with password: " + password, HttpStatus.OK);
     }
 
+    @GetMapping("/deprecated")
+    public ResponseEntity<String> deprecatedExample() {
+        // 👇 java.util.Date constructor is deprecated
+        java.util.Date date = new java.util.Date(122, 0, 1); // Year is 1900 + 122 = 2022
+
+        return new ResponseEntity<>("Deprecated date: " + date.toString(), HttpStatus.OK);
+    }
+
 }
