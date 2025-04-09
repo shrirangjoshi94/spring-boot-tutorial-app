@@ -87,4 +87,15 @@ public ResponseEntity<List<Product>> getAll()
         return new ResponseEntity<>("Deprecated date: " + date.toString(), HttpStatus.OK);
     }
 
+    @GetMapping("/test1")
+    public int test1() {
+
+        if(true) {
+            return 50;
+        } else {
+            return 50;
+        }
+
+    }
+
 }
