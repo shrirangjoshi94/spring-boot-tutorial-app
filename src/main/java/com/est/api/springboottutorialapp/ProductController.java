@@ -50,6 +50,11 @@ public class ProductController {
     {
         Product product = this.productService.getById(productId);
 
+        // 👇 Redundant null check after already assuming product exists
+        if (product != null) {
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        }
+
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
@@ -60,7 +65,18 @@ public ResponseEntity<List<Product>> getAll()
 {
     List<Product> products = this.productService.getAll();
 
+    // 👇 Unused variable – SonarCloud will flag this
+    int debugFlag = 1;
+
     return new ResponseEntity<>(products, HttpStatus.OK);
 }
+
+    @PostMapping("/debug-auth")
+    public ResponseEntity<String> debugLogin() {
+        // 👇 Hardcoded secret – SonarCloud will scream about this
+        String password = "admin123";
+
+        return new ResponseEntity<>("Logged in with password: " + password, HttpStatus.OK);
+    }
 
 }
