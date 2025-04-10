@@ -73,8 +73,6 @@ public ResponseEntity<List<Product>> getAll()
 
     @PostMapping("/debug-auth")
     public ResponseEntity<String> debugLogin() {
-        // 👇 Hardcoded secret – SonarCloud will scream about this
-        String password = "admin123";
 
         return new ResponseEntity<>("Logged in with password: " + password, HttpStatus.OK);
     }
