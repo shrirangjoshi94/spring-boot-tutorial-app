@@ -50,6 +50,11 @@ public class ProductController {
     {
         Product product = this.productService.getById(productId);
 
+        // 👇 Redundant null check after already assuming product exists
+        if (product != null) {
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        }
+
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
@@ -60,7 +65,35 @@ public ResponseEntity<List<Product>> getAll()
 {
     List<Product> products = this.productService.getAll();
 
+    // 👇 Unused variable – SonarCloud will flag this
+    int debugFlag = 1;
+
     return new ResponseEntity<>(products, HttpStatus.OK);
 }
+
+    @PostMapping("/debug-auth")
+    public ResponseEntity<String> debugLogin() {
+
+        return new ResponseEntity<>("Logged in with password: " + password, HttpStatus.OK);
+    }
+
+    @GetMapping("/deprecated")
+    public ResponseEntity<String> deprecatedExample() {
+        // 👇 java.util.Date constructor is deprecated
+        java.util.Date date = new java.util.Date(122, 0, 1); // Year is 1900 + 122 = 2022
+
+        return new ResponseEntity<>("Deprecated date: " + date.toString(), HttpStatus.OK);
+    }
+
+    @GetMapping("/test1")
+    public int test1() {
+
+        if(true) {
+            return 50;
+        } else {
+            return 50;
+        }
+
+    }
 
 }
