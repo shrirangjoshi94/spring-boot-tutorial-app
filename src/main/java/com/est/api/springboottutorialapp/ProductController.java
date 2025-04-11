@@ -17,18 +17,17 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product)
-    {
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         Product product1 = this.productService.create(product);
 
         return new ResponseEntity<Product>(product1, HttpStatus.CREATED);
     }
 
-//    update
+    //    update
     @PutMapping("/{productId}")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable int productId)
-    {
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable int productId) {
         Product product1 = this.productService.update(product, productId);
 
         return new ResponseEntity<>(product1, HttpStatus.OK);
@@ -36,31 +35,31 @@ public class ProductController {
 //    deelte
 
     @DeleteMapping("/{productId}")
-    public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable int productId)
-    {
+    public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable int productId) {
         this.productService.delete(productId);
         Map<String, String> response = Map.of("message", "product deleted successfully");
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    single product
+    //    single product
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> getProduct(@PathVariable int productId)
-    {
+    public ResponseEntity<Product> getProduct(@PathVariable int productId) {
         Product product = this.productService.getById(productId);
 
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-//    get all
+    //    get all
 //    single product
-@GetMapping("")
-public ResponseEntity<List<Product>> getAll()
-{
-    List<Product> products = this.productService.getAll();
+    @GetMapping("")
+    public ResponseEntity<List<Product>> getAll() {
+        List<Product> products = this.productService.getAll();
 
-    return new ResponseEntity<>(products, HttpStatus.OK);
-}
+
+        System.out.println("cehcking jira integratiion");
+
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 
 }
